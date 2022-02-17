@@ -59,7 +59,7 @@ int main(int argc, char const *argv[]) {
     fclose(fp);
     fp = NULL;
 
-    while (instructionPointer <= numberOfInstrunctions) { // run instructions
+    while (instructionPointer < numberOfInstrunctions) { // run instructions
         if (instruction[instructionPointer] == '>')
             dataPointer++;
         if (dataPointer >= maximumNumberOfData) {
