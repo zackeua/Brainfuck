@@ -6,7 +6,7 @@ CCP = clang++
 
 CFLAGS = -Ofast -g -Wall -Werror
 HASKELLFLAGS = -O2
-
+RUSTFLAGS = -C target-cpu=native
 
 C_EXEC1 = brainlang
 C_EXEC2 = gbrain
@@ -17,12 +17,15 @@ CPP_EXEC = cppbrain
 C_CODE = brainfuck.c
 HASKELL_CODE = brainfuck.hs
 CPP_CODE = brainfuck.cpp
+RUST_CODE = brainfuck.rs
 
 all: c haskell rust 
 
 c:$(C_EXEC1)
 
 haskell:$(HASKELL_EXEC)
+
+rust:$(RUST_EXEC)
 
 cpp:$(CPP_EXEC)
 
@@ -38,5 +41,15 @@ $(HASKELL_EXEC): $(HASKELL_CODE)
 $(CPP_EXEC): $(CPP_CODE)
 	$(CCP) $(CFLAGS) -o $(CPP_EXEC) $(CPP_CODE)
 
+$(RUST_EXEC): $(RUST_CODE)
+	$(RUSTCC) $(RUSTFLAGS) -o $(RUST_EXEC) $(RUST_CODE) -g
+
+
 clean:
-	rm -r $(C_EXEC1) $(C_EXEC2) $(HASKELL_EXEC) *.hi *.o 
+	rm -r $(C_EXEC1)
+	rm -r $(C_EXEC2)
+	rm -r $(HASKELL_EXEC) 
+	rm -r *.hi
+	rm -r *.o
+	rm -r $(CPP_EXEC)
+	rm -r $(RUST_EXEC)
