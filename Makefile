@@ -14,7 +14,7 @@ HASKELL_EXEC = haskellfuck
 RUST_EXEC = rustybrain
 CPP_EXEC = cppbrain
 
-C_CODE = brainfuck.c
+C_CODE = src/c/brainfuck.c
 HASKELL_CODE = brainfuck.hs
 CPP_CODE = brainfuck.cpp
 RUST_CODE = brainfuck.rs
@@ -42,7 +42,7 @@ $(CPP_EXEC): $(CPP_CODE)
 	$(CCP) $(CFLAGS) -o $(CPP_EXEC) $(CPP_CODE)
 
 $(RUST_EXEC): $(RUST_CODE)
-	$(RUSTCC) $(RUSTFLAGS) -o $(RUST_EXEC) $(RUST_CODE) -g
+	cargo build --release
 
 
 clean:
